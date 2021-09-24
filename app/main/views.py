@@ -1,8 +1,8 @@
 from flask import render_template
-from app import app
+from . import main
 
 # Views
-@app.route('/')
+@main.route('/')
 def index():
 
     '''
@@ -11,7 +11,7 @@ def index():
     title = 'Welcome to The best Blog Website Online'
     return render_template('index.html', title=title)
 
-@app.route('/blog/<int:blog_id>')
+@main.route('/blog/<int:blog_id>')
 def blog(blog_id):
 
     '''
