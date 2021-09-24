@@ -8,11 +8,11 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    message = 'BLOG'
-    return render_template('index.html', message=message)
+    title = 'Welcome to The best Blog Website Online'
+    return render_template('index.html', title=title)
 
 @app.route('/blog/<int:blog_id>')
-def movie(blog_id):
+def blog(blog_id):
 
     '''
     View movie page function that returns the movie details page and its data
