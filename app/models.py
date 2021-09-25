@@ -1,7 +1,7 @@
-from . import db
+from . import db,login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-from flask_login import UserMixin, login_manager
+from flask_login import UserMixin
 
 
 @login_manager.user_loader
@@ -14,13 +14,19 @@ class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
+    firstname = db.Column(db.String(255))
+    lastname = db.Column(db.String(255))
     password_hash = db.Column(db.String(128))
     subscription = db.Column(db.Boolean)
     date_joined = db.Column(db.DateTime, default=datetime.utcnow)
+    #######added for profile
+    bio = db.Column(db.String(255),default ='My default Bio')
+    profile_pic_path = db.Column(db.String(150),default ='default.png')
+
 
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     posts = db.relationship('Post',backref = 'post',lazy = "dynamic")
-    comments = db.relationship('Comment',backref = 'post_id',lazy = 'dynamic')
+    # comments = db.relationship('Comment',backref = 'post_id',lazy = 'dynamic')
 
 
     @property
