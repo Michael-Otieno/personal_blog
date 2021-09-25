@@ -1,5 +1,8 @@
 from flask import render_template
 from . import main
+from flask_login import login_required
+
+
 
 # Views
 @main.route('/')
@@ -12,6 +15,7 @@ def index():
     return render_template('index.html', title=title)
 
 @main.route('/blog/<int:blog_id>')
+@login_required
 def blog(blog_id):
 
     '''
