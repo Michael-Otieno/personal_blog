@@ -23,7 +23,7 @@ def index():
 @main.route('/post/new', methods =['GET','POST'])
 @login_required
 def new_post():
-    if current_user.role_id == 1:
+    if current_user.id:#role_id == 1
         post_form = PostForm()
         if post_form.validate_on_submit():
             title = post_form.title.data
