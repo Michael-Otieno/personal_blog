@@ -13,9 +13,7 @@ from ..email import mail_message
 @main.route('/')
 def index():
 
-    '''
-    View root page function that returns the index page and its data
-    '''
+   
     posts = Post.query.order_by(Post.date_posted.desc()).limit(3).all()
 
     title = 'Welcome to The best Blog Website Online'
