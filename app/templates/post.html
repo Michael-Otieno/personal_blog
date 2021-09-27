@@ -27,7 +27,7 @@
         {%endif%}
         {%for comment in comments%}
             <div class="col-md-12">
-                <h5>{{comment.user.username}}</h5>
+                <h5>{{comment.user_id}}</h5>
                 <p>{{comment.comment}}</p>
                 {% if current_user.is_authenticated and current_user.id %}
                     <a href="{{url_for('main.delete_comment',id = comment.id,post_id = comment.post)}}" class="btn btn-danger btn-sm">Delete comment</a>

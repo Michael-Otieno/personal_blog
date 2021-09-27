@@ -4,7 +4,6 @@ from ..models import User,Post,Comment
 from .. import db
 from .forms import PostForm, CommentForm
 from flask_login import login_required, current_user
-import datetime
 from ..email import mail_message
 
 
@@ -23,7 +22,7 @@ def index():
 @main.route('/post/new', methods =['GET','POST'])
 @login_required
 def new_post():
-    if current_user.id:#role_id == 1
+    if current_user.id:
         post_form = PostForm()
         if post_form.validate_on_submit():
             title = post_form.title.data
@@ -31,10 +30,8 @@ def new_post():
 
             users = User.query.all()
 
-            # Update pitch instance
             new_post = Post(title=title,text=text,post=current_user)
 
-            # Save post method
             new_post.save_post()
 
             for user in users:
@@ -62,10 +59,11 @@ def post(id):
     form = CommentForm()
     post = Post.get_post(id)
 
+
     if form.validate_on_submit():
         comment = form.text.data
 
-        new_comment = Comment(comment = comment,user = current_user,post = post.id)
+        new_comment = Comment(comment = comment,post = post.id)
 
         new_comment.save_comment()
 
@@ -119,8 +117,9 @@ def update_post(id):
         post.title = title
         post.text = text
 
+        db.session.add()
         db.session.commit()
 
-        return redirect(url_for('main.post',id = post.id))
+        return redirect(url_for('main.post',id=post.id))
 
     return render_template('update.html',form = form)
