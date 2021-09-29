@@ -1,3 +1,4 @@
+from app.request import posting
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..models import User,Post,Comment
@@ -16,7 +17,8 @@ def index():
     posts = Post.query.order_by(Post.date_posted.desc()).limit(3).all()
 
     title = 'Welcome to The best Blog Website Online'
-    return render_template('index.html', title=title, posts = posts)
+    postings=posting()
+    return render_template('index.html', title=title, posts = posts,postings=postings)
 
 
 @main.route('/post/new', methods =['GET','POST'])
@@ -117,9 +119,8 @@ def update_post(id):
         post.title = title
         post.text = text
 
-        db.session.add()
         db.session.commit()
 
         return redirect(url_for('main.post',id=post.id))
-
+    
     return render_template('update.html',form = form)

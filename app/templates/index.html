@@ -7,7 +7,12 @@
 <!-- Content block -->
 {%block content%}
 <div class="container" style="padding-bottom: 20px;">
-
+    <h3>
+        Random Quotes
+    </h3>
+    <p>{{postings.quote}}</p>
+    <h3>{{postings.author}}</h3>
+    <a href="{{postings.permalink}}"> <button>Read More</button></a>
 </div>
 <div class="container">
     <h1>Recent posts</h1>
